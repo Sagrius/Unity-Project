@@ -7,10 +7,18 @@ public class PlayerMovment : MonoBehaviour
 {
     [SerializeField] CharacterController _characterController;
     [SerializeField] Transform _camera;
-    [SerializeField] int _movementSpeed = 4;
+    [SerializeField] float _movementSpeed = 4;
     
     float _turnSmoothTime = 0.1f;
     float _turnSmoothVelocity;
+
+    private void OnValidate()
+    {
+        if(TryGetComponent(out CharacterController cc))
+        {
+            _characterController ??= cc;
+        }
+    }
 
 
     private void Update()
