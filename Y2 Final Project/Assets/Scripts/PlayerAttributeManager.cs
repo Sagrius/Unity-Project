@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAttributeManager : MonoBehaviour
 {
-    public static PlayerAttributeManager instance { get; private set; }
+    public static PlayerAttributeManager Instance { get; private set; }
 
     public uint Score { get; private set; } = 0;
-    public int MaxHP { get; private set; } = 100;
-    public int CurrentHP { get; private set; } = 100;
+    public float MaxHP { get; private set; } = 100;
+    public float CurrentHP { get; private set; } = 100;
     public float PlayerWalkSpeedMod { get; private set; }
     public uint PlayerDamageMod { get; private set; }
     public uint PlayerReloadSpeedMod { get; private set; } = 1;
@@ -18,10 +19,9 @@ public class PlayerAttributeManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        if (Instance == null)
+            Instance = this;
+        StartCoroutine(Test());
     }
 
     private void TakeDamage(uint damage)
@@ -32,5 +32,11 @@ public class PlayerAttributeManager : MonoBehaviour
         {
             Debug.Log("Player has died");
         }
+    }
+
+    private IEnumerator Test()
+    {
+        yield return new WaitForSeconds(3);
+        TakeDamage(5);
     }
 }

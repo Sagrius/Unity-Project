@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1768238675862000689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6622346672364540370}
+  m_Layer: 0
+  m_Name: BulletSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6622346672364540370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768238675862000689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.291, z: 0.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5745735433455332879}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3568493356165419706
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +151,8 @@ GameObject:
   - component: {fileID: 7181546910647727968}
   - component: {fileID: -7280875172723525321}
   - component: {fileID: 4225608700722910300}
+  - component: {fileID: 6560686417485485053}
+  - component: {fileID: 2148910831487122026}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -141,6 +174,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8859521313707745998}
+  - {fileID: 6622346672364540370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2511471091871049623
@@ -228,9 +262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94092b0b4958db145be4be093884f0ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterController: {fileID: 4225608700722910300}
-  Camera: {fileID: 0}
-  Movementspeed: 6
+  _characterController: {fileID: 4225608700722910300}
+  _camera: {fileID: 0}
+  _movementSpeed: 4
 --- !u!143 &4225608700722910300
 CharacterController:
   m_ObjectHideFlags: 0
@@ -257,6 +291,32 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6560686417485485053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272442331211011612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7604bb2e96f3c3b4d86782fb18aa6231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2148910831487122026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8272442331211011612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36dbf50c8dce4b640a58abe16fb0455b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPos: {fileID: 6622346672364540370}
+  BaseFireRate: 2
 --- !u!1 &8853201058523088222
 GameObject:
   m_ObjectHideFlags: 0
