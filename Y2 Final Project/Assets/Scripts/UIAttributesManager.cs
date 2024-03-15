@@ -5,19 +5,20 @@ using UnityEngine.UI;
 
 public class UIAttributesManager : MonoBehaviour
 {
-    [SerializeField] private Image healthBar;
-    [SerializeField] private Image pistolAmmoBar;
+    [SerializeField] private Image _healthBar;
+    [SerializeField] private Image _pistolAmmoBar;
+    [SerializeField] private PistolWeaponScript _pistol;
 
     private void LateUpdate()
     {
         if (PlayerAttributeManager.Instance != null)
         {
-            healthBar.fillAmount = PlayerAttributeManager.Instance.CurrentHP / PlayerAttributeManager.Instance.MaxHP;
+            _healthBar.fillAmount = PlayerAttributeManager.Instance._currentHP / PlayerAttributeManager.Instance._maxHP;
         }
 
-        if (PistolWeaponScript.Instance != null)
+        if (_pistol != null)
         {
-            pistolAmmoBar.fillAmount = PistolWeaponScript.Instance.BulletsInMag / PistolWeaponScript.Instance.FinalMagSize;
+            _pistolAmmoBar.fillAmount = _pistol._bulletsInMag / _pistol._finalMagSize;
         }
     }
 }

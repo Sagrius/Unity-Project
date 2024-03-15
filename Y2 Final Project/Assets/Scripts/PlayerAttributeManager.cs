@@ -3,32 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerAttributeManager : MonoBehaviour
+public class PlayerAttributeManager : AbstractUnit
 {
     public static PlayerAttributeManager Instance { get; private set; }
 
-    public uint Score { get; private set; } = 0;
-    public float MaxHP { get; private set; } = 100;
-    public float CurrentHP { get; private set; } = 100;
-    public float PlayerWalkSpeedMod { get; private set; }
-    public uint PlayerDamageMod { get; private set; }
-    public uint PlayerReloadSpeedMod { get; private set; } = 1;
-    public uint PlayerFireRateMod { get; private set; } = 1;
-    public float PlayerMagSizeMod { get; private set; } = 1f;
-    public uint PlayerArmorValue { get; private set; }
+    public uint _score { get; private set; } = 0;
+    public float _walkSpeedMod { get; private set; }
+    public float _reloadSpeedMod { get; private set; } = 1f;
+    public float _magSizeMod { get; private set; } = 1f;
+
+    private void OnValidate()
+    {
+        _maxHP = 100;
+        _currentHP = _maxHP;
+        _damageMod = 1f;
+        _attackSpeedMod = 1f;
+        _armor = 0;
+    }
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
             Instance = this;
+        }
         StartCoroutine(Test());
     }
 
-    private void TakeDamage(uint damage)
+    public override void TakeDamage(uint damage)
     {
-        CurrentHP -= (int)damage;
-        Debug.Log($"Player took {damage} damage, they have {CurrentHP}HP left.");
-        if (CurrentHP <= 0)
+        _currentHP -= (int)damage;
+        Debug.Log($"Player took {damage} damage, they have {_currentHP}HP left.");
+        if (_currentHP <= 0)
         {
             Debug.Log("Player has died");
         }

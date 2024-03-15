@@ -3,58 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PistolWeaponScript : MonoBehaviour
+public class PistolWeaponScript : AbstractWeapon
 {
-    public static PistolWeaponScript Instance { get; private set; }
-
     [SerializeField] private Transform SpawnPos;
-    [SerializeField] private float BaseFireRate = 2f; //Remove serialize after testing is done
-    public float FireRateMod { get; private set; } = 1f;
-    public float FinalFireRate { get; private set; }
-    private float lastTimeFired;
-    public float BaseMagSize { get; private set; } = 12;
-    public float MagSizeMod { get; private set; } = 1f;
-    public float FinalMagSize { get; private set; }
-    public float BulletsInMag { get; private set; }
-    private bool GotBulletsLoaded => BulletsInMag >= 1;
-    public float BaseReloadSpeed { get; private set; } = 1.2f;
-    public float ReloadSpeedMod { get; private set; } = 1f;
-    public float FinalReloadSpeed { get; private set; }
-    private bool currentlyReloading = false;
+
+    private void OnValidate()
+    {
+        _baseFireRate = 2f;
+        _fireRateMod = 1f;
+        _baseMagSize = 12;
+        _magSizeMod = 1f;
+        _baseReloadSpeed = 1.2f;
+        _reloadSpeedMod = 1f;
+    }
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
         StartCoroutine(WaitBeforeCalc());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (Time.time >= lastTimeFired + (1/FinalFireRate) && GotBulletsLoaded)
+        if (Time.time >= _lastTimeFired + (1 / _finalFireRate) && _gotBulletsLoaded)
         {
-            FireBullet();
-            lastTimeFired = Time.time;
+            Fire();
+            _lastTimeFired = Time.time;
         }
-        else if (!currentlyReloading && !GotBulletsLoaded)
-            StartCoroutine(WaitAndReload());
+        else if (!_currentlyReloading && !_gotBulletsLoaded)
+            Reload();
     }
 
     //Use this every time the weapon is upgraded to update the attributes
-    private void CalculateFinalAttributes()
+    public override void CalculateFinalAttributes()
     {
-        FinalFireRate = BaseFireRate * FireRateMod * PlayerAttributeManager.Instance.PlayerFireRateMod;
-        FinalMagSize = BaseMagSize * MagSizeMod * PlayerAttributeManager.Instance.PlayerMagSizeMod;
-        BulletsInMag = FinalMagSize;
-        FinalReloadSpeed = BaseReloadSpeed * ReloadSpeedMod * PlayerAttributeManager.Instance.PlayerReloadSpeedMod;
+        _finalFireRate = _baseFireRate * _fireRateMod * PlayerAttributeManager.Instance._attackSpeedMod;
+        _finalMagSize = _baseMagSize * _magSizeMod * PlayerAttributeManager.Instance._magSizeMod;
+        _bulletsInMag = _finalMagSize;
+        _finalReloadSpeed = _baseReloadSpeed * _reloadSpeedMod * PlayerAttributeManager.Instance._reloadSpeedMod;
     }
 
-    private void FireBullet()
+    public override void Fire()
     {
-        if (BulletsInMag >= 1)
+        if (_bulletsInMag >= 1)
         {//Fire
             Debug.Log("Bullet Fired");
-            BulletsInMag--;
+            _bulletsInMag--;
             GameObject bullet = BulletObjectPool.Instance.GetBulletFromPool();
             bullet.SetActive(true);
             bullet.transform.position = SpawnPos.position;
@@ -62,13 +55,18 @@ public class PistolWeaponScript : MonoBehaviour
         }
     }
 
+    public override void Reload()
+    {
+        StartCoroutine(WaitAndReload());
+    }
+
     private IEnumerator WaitAndReload()
     {
-        currentlyReloading = true;
+        _currentlyReloading = true;
         Debug.Log("Reload Started");
-        yield return new WaitForSeconds(FinalReloadSpeed);
-        BulletsInMag = FinalMagSize;
-        currentlyReloading = false;
+        yield return new WaitForSeconds(_finalReloadSpeed);
+        _bulletsInMag = _finalMagSize;
+        _currentlyReloading = false;
     }
 
     private IEnumerator WaitBeforeCalc()
