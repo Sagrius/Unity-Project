@@ -369,6 +369,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 388496932}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &212207679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 212207681}
+  - component: {fileID: 212207680}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &212207680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212207679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1478127162731d45b0ea9a156b5746f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SpawnLocations:
+  - {fileID: 1488567252}
+  - {fileID: 1664789366}
+  - {fileID: 1872811848}
+  - {fileID: 8218799472982036673}
+--- !u!4 &212207681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 212207679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &237140993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4081,6 +4130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Location (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7243777274767123464, guid: 10bdd326cc1cae24f89fb27412eb879b, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4793,6 +4846,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Location (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7243777274767123464, guid: 10bdd326cc1cae24f89fb27412eb879b, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5273,6 +5330,10 @@ PrefabInstance:
     - target: {fileID: 7243777274767123464, guid: 10bdd326cc1cae24f89fb27412eb879b, type: 3}
       propertyPath: m_Name
       value: Spawn Location (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243777274767123464, guid: 10bdd326cc1cae24f89fb27412eb879b, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPoint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6069,6 +6130,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1488567252}
     - target: {fileID: -7280875172723525321, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
+      propertyPath: SpawnManager
+      value: 
+      objectReference: {fileID: 212207679}
+    - target: {fileID: -7280875172723525321, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
       propertyPath: _movementSpeed
       value: 6
       objectReference: {fileID: 0}
@@ -6445,6 +6510,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Location
       objectReference: {fileID: 0}
+    - target: {fileID: 7243777274767123464, guid: 10bdd326cc1cae24f89fb27412eb879b, type: 3}
+      propertyPath: m_TagString
+      value: SpawnPoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6466,3 +6535,4 @@ SceneRoots:
   - {fileID: 755707883}
   - {fileID: 1034817687}
   - {fileID: 2120170591}
+  - {fileID: 212207681}

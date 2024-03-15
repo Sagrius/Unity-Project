@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovment : MonoBehaviour, ISpawnRandomPoint
+public class PlayerMovment : MonoBehaviour
 {
     [SerializeField] GameObject Player;
-    [SerializeField] Transform SpawnPoint1;
-    [SerializeField] Transform SpawnPoint2;
-    [SerializeField] Transform SpawnPoint3;
-    [SerializeField] Transform SpawnPoint4;
-
+    [SerializeField] GameObject SpawnManager;
     [SerializeField] CharacterController _characterController;
     [SerializeField] Transform _camera;
     [SerializeField] float _movementSpeed = 4;
@@ -20,7 +16,9 @@ public class PlayerMovment : MonoBehaviour, ISpawnRandomPoint
 
     private void Start()
     {
-        SpawnAtRandomPoint(Player, SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4);
+        Spawn_Logic spawnLogic = SpawnManager.GetComponent<Spawn_Logic>();
+
+        spawnLogic.SpawnAtRandomPoint(Player, spawnLogic._SpawnLocations);
     }
 
     private void OnValidate()
@@ -51,13 +49,6 @@ public class PlayerMovment : MonoBehaviour, ISpawnRandomPoint
             Vector3 MoveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             _characterController.Move(MoveDir.normalized * _movementSpeed * Time.deltaTime);
         }
-    }
-
-    public void SpawnAtRandomPoint(GameObject PrefabToSpawn, Transform SpawnPoint1, Transform SpawnPoint2, Transform SpawnPoint3, Transform SpawnPoint4)
-    {
-        Transform[] spawnPoints = new Transform[] { SpawnPoint1, SpawnPoint2, SpawnPoint3, SpawnPoint4};
-        int RandomIndex = Random.Range(0, spawnPoints.Length);
-        PrefabToSpawn.transform.position = new Vector3(spawnPoints[RandomIndex].position.x, Player.transform.position.y, spawnPoints[RandomIndex].position.z + 4);
     }
 }
 
