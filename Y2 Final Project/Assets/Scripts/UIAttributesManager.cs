@@ -13,12 +13,12 @@ public class UIAttributesManager : MonoBehaviour
     {
         if (PlayerAttributeManager.Instance != null)
         {
-            _healthBar.fillAmount = PlayerAttributeManager.Instance._currentHP / PlayerAttributeManager.Instance._maxHP;
+            _healthBar.fillAmount = PlayerAttributeManager.Instance.CurrentHP / PlayerAttributeManager.Instance.MaxHP;
         }
 
         if (_pistol != null)
         {
-            _pistolAmmoBar.fillAmount = _pistol._bulletsInMag / _pistol._finalMagSize;
+            _pistolAmmoBar.fillAmount = _pistol.BulletsInMag / _pistol.FinalMagSize;
         }
     }
 }

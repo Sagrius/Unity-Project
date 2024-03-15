@@ -4,21 +4,49 @@ using UnityEngine;
 
 public abstract class AbstractWeapon : MonoBehaviour
 {
-    public float _baseFireRate { get; protected set; }
-    public float _fireRateMod { get; protected set; }
-    public float _finalFireRate { get; protected set; }
-    public float _lastTimeFired { get; protected set; }
-    public float _baseMagSize { get; protected set; }
-    public float _magSizeMod { get; protected set; }
-    public float _finalMagSize { get; protected set; }
-    public float _bulletsInMag { get; protected set; }
-    public bool _gotBulletsLoaded => _bulletsInMag >= 1;
-    public float _baseReloadSpeed { get; protected set; }
-    public float _reloadSpeedMod { get; protected set; }
-    public float _finalReloadSpeed { get; protected set; }
-    public bool _currentlyReloading = false;
+    protected bool _currentlyReloading = false;
 
-    public abstract void Fire();
+    #region properties
+    public float BulletsInMag { get;  set; }
+    public float FinalMagSize { get;  set; }
+
+    #region seriealizedProperies
+    [field: SerializeField] protected Transform BulletSpawnPoint { get;  set; }
+    [field: SerializeField] protected float BaseFireRate { get;  set; }
+    [field: SerializeField] protected float FireRateMod { get;  set; }
+    [field: SerializeField] protected float MagSizeMod { get;  set; }
+    [field: SerializeField] protected float BaseReloadSpeed { get;  set; }
+    [field: SerializeField] protected float BaseMagSize { get;  set; }
+    [field: SerializeField] protected float ReloadSpeedMod { get;  set; }
+    #endregion
+
+    protected float FinalFireRate { get;  set; }
+    protected bool GotBulletsLoaded => BulletsInMag >= 1;
+    protected float FinalReloadSpeed { get; set; }
+    protected float LastTimeFired { get; set; }
+    #endregion
+
     public abstract void Reload();
-    public abstract void CalculateFinalAttributes();
+
+    //Use this every time the weapon is upgraded to update the attributes
+    public virtual void CalculateFinalAttributes()
+    {
+        FinalFireRate = BaseFireRate * FireRateMod * PlayerAttributeManager.Instance.AttackSpeedMod;
+        FinalMagSize = Mathf.Max((BaseMagSize * MagSizeMod * PlayerAttributeManager.Instance.MagSizeMod), 1);
+        BulletsInMag = FinalMagSize;
+        FinalReloadSpeed = BaseReloadSpeed * ReloadSpeedMod * PlayerAttributeManager.Instance.ReloadSpeedMod;
+    }
+
+    public virtual void Fire()
+    {
+        if (BulletsInMag >= 1)
+        {//Fire
+            Debug.Log("Bullet Fired");
+            BulletsInMag--;
+            GameObject bullet = BulletObjectPool.Instance.GetBulletFromPool();
+            bullet.SetActive(true);
+            bullet.transform.position = BulletSpawnPoint.position;
+            bullet.transform.rotation = BulletSpawnPoint.rotation;
+        }
+    }
 }

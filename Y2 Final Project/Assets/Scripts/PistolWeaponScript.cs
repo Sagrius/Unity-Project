@@ -5,18 +5,6 @@ using UnityEngine.Events;
 
 public class PistolWeaponScript : AbstractWeapon
 {
-    [SerializeField] private Transform SpawnPos;
-
-    private void OnValidate()
-    {
-        _baseFireRate = 2f;
-        _fireRateMod = 1f;
-        _baseMagSize = 12;
-        _magSizeMod = 1f;
-        _baseReloadSpeed = 1.2f;
-        _reloadSpeedMod = 1f;
-    }
-
     private void Awake()
     {
         StartCoroutine(WaitBeforeCalc());
@@ -24,35 +12,13 @@ public class PistolWeaponScript : AbstractWeapon
 
     private void Update()
     {
-        if (Time.time >= _lastTimeFired + (1 / _finalFireRate) && _gotBulletsLoaded)
+        if (Time.time >= LastTimeFired + (1 / FinalFireRate) && GotBulletsLoaded)
         {
             Fire();
-            _lastTimeFired = Time.time;
+            LastTimeFired = Time.time;
         }
-        else if (!_currentlyReloading && !_gotBulletsLoaded)
+        else if (!_currentlyReloading && !GotBulletsLoaded)
             Reload();
-    }
-
-    //Use this every time the weapon is upgraded to update the attributes
-    public override void CalculateFinalAttributes()
-    {
-        _finalFireRate = _baseFireRate * _fireRateMod * PlayerAttributeManager.Instance._attackSpeedMod;
-        _finalMagSize = _baseMagSize * _magSizeMod * PlayerAttributeManager.Instance._magSizeMod;
-        _bulletsInMag = _finalMagSize;
-        _finalReloadSpeed = _baseReloadSpeed * _reloadSpeedMod * PlayerAttributeManager.Instance._reloadSpeedMod;
-    }
-
-    public override void Fire()
-    {
-        if (_bulletsInMag >= 1)
-        {//Fire
-            Debug.Log("Bullet Fired");
-            _bulletsInMag--;
-            GameObject bullet = BulletObjectPool.Instance.GetBulletFromPool();
-            bullet.SetActive(true);
-            bullet.transform.position = SpawnPos.position;
-            bullet.transform.rotation = SpawnPos.rotation;
-        }
     }
 
     public override void Reload()
@@ -64,8 +30,8 @@ public class PistolWeaponScript : AbstractWeapon
     {
         _currentlyReloading = true;
         Debug.Log("Reload Started");
-        yield return new WaitForSeconds(_finalReloadSpeed);
-        _bulletsInMag = _finalMagSize;
+        yield return new WaitForSeconds(FinalReloadSpeed);
+        BulletsInMag = FinalMagSize;
         _currentlyReloading = false;
     }
 
