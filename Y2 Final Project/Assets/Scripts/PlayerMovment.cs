@@ -5,21 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovment : MonoBehaviour
 {
-    [SerializeField] GameObject Player;
-    [SerializeField] GameObject SpawnManager;
     [SerializeField] CharacterController _characterController;
     [SerializeField] Transform _camera;
     [SerializeField] float _movementSpeed = 4;
 
     float _turnSmoothTime = 0.1f;
     float _turnSmoothVelocity;
-
-    private void Start()
-    {
-        Spawn_Logic spawnLogic = SpawnManager.GetComponent<Spawn_Logic>();
-
-        spawnLogic.SpawnAtRandomPoint(Player, spawnLogic._SpawnLocations);
-    }
 
     private void OnValidate()
     {
@@ -28,7 +19,6 @@ public class PlayerMovment : MonoBehaviour
             _characterController ??= cc;
         }
     }
-
 
     private void Update()
     {

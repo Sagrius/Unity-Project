@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISpawnRandomPoint
 {
-    public void SpawnAtRandomPoint(GameObject PrefabToSpawn, List<Transform> SpawnsLocations);
+    public void SpawnAtRandomPoint(GameObject PrefabToSpawn);
 }
