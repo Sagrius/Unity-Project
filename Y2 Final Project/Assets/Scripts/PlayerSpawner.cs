@@ -30,6 +30,8 @@ public class PlayerSpawner : MonoBehaviour, ISpawnRandomPoint
 
     private void Start()
     {
+        if (SpawnLocations.Count == 0)
+            return;
         SpawnAtRandomPoint(_player);
     }
 
