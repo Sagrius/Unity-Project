@@ -7,7 +7,7 @@ public class UIAttributesManager : MonoBehaviour
 {
     [SerializeField] private Image _healthBar;
     [SerializeField] private Image _pistolAmmoBar;
-    [SerializeField] private BarsWeaponScript _pistol;
+    [SerializeField] private PistolWeaponScript _pistol;
 
     private void LateUpdate()
     {

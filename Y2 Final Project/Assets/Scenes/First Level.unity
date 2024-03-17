@@ -5684,6 +5684,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1520326390547480873}
     - target: {fileID: 2148910831487122026, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
+      propertyPath: assultRifle
+      value: 
+      objectReference: {fileID: 11400000, guid: c23d6e4bb7f3aa94f920b5b912937bdc, type: 2}
+    - target: {fileID: 2148910831487122026, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
       propertyPath: <MagSizeMod>k__BackingField
       value: 1
       objectReference: {fileID: 0}
@@ -5755,6 +5759,14 @@ PrefabInstance:
       propertyPath: <MaxHP>k__BackingField
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6560686417485485053, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
+      propertyPath: <DamageMod>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6560686417485485053, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
+      propertyPath: <AttackSpeedMod>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8272442331211011612, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5769,17 +5781,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5745735433455332879, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
   m_PrefabInstance: {fileID: 1520326390547480870}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1520326390547480872 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2148910831487122026, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
-  m_PrefabInstance: {fileID: 1520326390547480870}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36dbf50c8dce4b640a58abe16fb0455b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1520326390547480873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6622346672364540370, guid: 34cb693151dad38479cd15c38a74ea60, type: 3}
@@ -6182,7 +6183,7 @@ PrefabInstance:
     - target: {fileID: 2119188926466053125, guid: 295dc2b2d75facf458b437c824681a56, type: 3}
       propertyPath: _pistol
       value: 
-      objectReference: {fileID: 1520326390547480872}
+      objectReference: {fileID: 0}
     - target: {fileID: 3038813703620908438, guid: 295dc2b2d75facf458b437c824681a56, type: 3}
       propertyPath: m_Name
       value: UI
