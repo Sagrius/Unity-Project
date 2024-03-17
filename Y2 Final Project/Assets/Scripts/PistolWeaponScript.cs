@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BarsWeaponScript : AbstractWeapon
+public class PistolWeaponScript : AbstractWeapon
 {
-
-    public WeaponScriptableObject assultRifle;
-
-
     private void Awake()
     {
         StartCoroutine(WaitBeforeCalc());
@@ -23,17 +19,6 @@ public class BarsWeaponScript : AbstractWeapon
         }
         else if (!_currentlyReloading && !GotBulletsLoaded)
             Reload();
-    }
-
-    public void SwapWeapon()
-    {
-        BaseDamage = assultRifle.damage;
-        BaseFireRate = assultRifle.fireRate;
-        FinalMagSize = assultRifle.magazineSize;
-        BaseReloadSpeed = assultRifle.reloadSpeed;
-        DamageMod = assultRifle.modifier;
-        
-
     }
 
     public override void Reload()

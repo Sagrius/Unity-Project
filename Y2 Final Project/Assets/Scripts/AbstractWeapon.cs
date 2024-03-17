@@ -7,16 +7,12 @@ public abstract class AbstractWeapon : MonoBehaviour
     protected bool _currentlyReloading = false;
 
     #region properties
-
-    public float FinalDamage { get; set; }
     public float BulletsInMag { get;  set; }
     public float FinalMagSize { get;  set; }
 
     #region seriealizedProperies
     [field: SerializeField] protected Transform BulletSpawnPoint { get;  set; }
     [field: SerializeField] protected float BaseFireRate { get;  set; }
-    [field: SerializeField] protected float BaseDamage { get; set; }
-    [field: SerializeField] protected float DamageMod { get; set; }
     [field: SerializeField] protected float FireRateMod { get;  set; }
     [field: SerializeField] protected float MagSizeMod { get;  set; }
     [field: SerializeField] protected float BaseReloadSpeed { get;  set; }
@@ -35,7 +31,6 @@ public abstract class AbstractWeapon : MonoBehaviour
     //Use this every time the weapon is upgraded to update the attributes
     public virtual void CalculateFinalAttributes()
     {
-        FinalDamage = BaseDamage * DamageMod;
         FinalFireRate = BaseFireRate * FireRateMod * PlayerAttributeManager.Instance.AttackSpeedMod;
         FinalMagSize = Mathf.Max((BaseMagSize * MagSizeMod * PlayerAttributeManager.Instance.MagSizeMod), 1);
         BulletsInMag = FinalMagSize;
