@@ -23,19 +23,35 @@ public class PistolWeaponScript : AbstractWeapon
         else if (!_currentlyReloading && !GotBulletsLoaded)
             Reload();
 
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(KeyCode.Alpha1))
         {
-            SwapWeapon();
+            SwapWeapon(0);
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            SwapWeapon(1);
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            SwapWeapon(2);
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            SwapWeapon(3);
+        }
+        if (Input.GetKey(KeyCode.Alpha5))
+        {
+            SwapWeapon(4);
         }
     }
 
-    public void SwapWeapon()
+    public  void SwapWeapon(int index)
     {
-        BaseDamage = assultRifle.damage;
-        BaseFireRate = assultRifle.fireRate;
-        FinalMagSize = assultRifle.magazineSize;
-        BaseReloadSpeed = assultRifle.reloadSpeed;
-        DamageMod = assultRifle.modifier;
+        BaseDamage = WeaponDataArray.weaponDatas[index].damage;
+        BaseFireRate = WeaponDataArray.weaponDatas[index].fireRate;
+        FinalMagSize = WeaponDataArray.weaponDatas[index].magazineSize;
+        BaseReloadSpeed = WeaponDataArray.weaponDatas[index].reloadSpeed;
+        DamageMod = WeaponDataArray.weaponDatas[index].modifier;
 
 
     }
